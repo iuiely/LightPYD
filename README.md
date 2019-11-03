@@ -13,9 +13,13 @@
 ##### 下载框架
   git clone https://github.com/iuiely/LightPYD.git <br>
 ##### 守护进程模式启动
-  /opt/python-daemonize/LightPYD start
+  /opt/python-daemonize/LightPYD {app} start  <br>
+  {app} 是应用配置文件的名称 <br>
+  例如:配置文件的名称是 system, 启动命令是：/opt/python-daemonize/LightPYD system start <br>
 ##### 守护进程模式停止
-  /opt/python-daemonize/LightPYD stop
+  /opt/python-daemonize/LightPYD {app} stop  <br>
+  {app} 是应用配置文件的名称 <br>
+  例如:配置文件的名称是 system, 停止命令是：/opt/python-daemonize/LightPYD system stop <br>
 ##### 简单测试
   代码
   /opt/python-daemonize/apps/console.py
