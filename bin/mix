@@ -1,0 +1,19 @@
+#!/usr/bin/env python
+import os
+import sys
+BASE= os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(BASE)
+from frame.lib.Config import *
+from frame.console import *
+
+if __name__ =='__main__':
+    _file = BASE+'/frame/config.ini'
+    cfg_dict = Config.DictMake(_file)
+    argv = sys.argv
+    del argv[0]
+    if not argv :
+        cfg_dict['command'] = ['help']
+    else:
+        cfg_dict['command'] = argv
+
+    console.run(cfg_dict)
