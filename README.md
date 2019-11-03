@@ -4,8 +4,8 @@
 ## 框架定位
   使用python语言，想把周期性任务以后台守护进程的运行的开发者和使用者
 ## 环境要求
-  python2.7 or python3.6
-  linux
+  python2.7 or python3.6 <br>
+  linux <br>
 ## 快速使用
 ##### 创建目录
   mkdir /opt/python-daemonize <br>
