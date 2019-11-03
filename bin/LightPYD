@@ -7,13 +7,14 @@ from frame.lib.Config import *
 from frame.console import *
 
 if __name__ =='__main__':
-    _file = BASE+'/frame/config.ini'
-    cfg_dict = Config.DictMake(_file)
+    sys.argv.pop(0)
     argv = sys.argv
-    del argv[0]
-    if not argv :
+    cfg_dict={}
+    if len(argv) == 2:
+        _file = BASE+'/frame/'+argv[0]+'.ini'
+        if os.path.exists(_file):
+            cfg_dict = Config.DictMake(_file)
+            cfg_dict['command'] = [argv[1]]
+    else :
         cfg_dict['command'] = ['help']
-    else:
-        cfg_dict['command'] = argv
-
     console.run(cfg_dict)
