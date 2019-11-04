@@ -84,7 +84,26 @@ mysql_connection = mysql+pymysql://db_user:db_password@db_host:db_port/db_databa
 ```
 ##### 读取配置文件的使用方法
   在读取配置前需要把目录加入到sys.path中.(bin/LightPYD 启动脚本已加入) <br>
-  from frame.lib.Config import * <br>
+  加载模块<br>
+  from frame.lib.Config import DictMake  OR from frame.lib.Config import * <br>
+  from frame.lib.Config import get  OR from frame.lib.Config import * <br>
+  读取配置方法1 <br>
+  Config.DictMake(file,path=None) <br>
+  
+  这个方法,file是1个key = value 的 ' .ini ' 配置文件，并且这个文件必须能访问到。path路文件的路径,会返回一个配置文件的字典 <br>
+  见意:1、如果输入file参数,不输入path参数,最好给file参数输入绝对路径。<br>
+       2、如果给file参数输入非绝对路径，并且输入path参数，这2个参数会组合成一个可访问的路径 <br>
+       
+  读取配置方法2 <br>
+  Config.get('str',path=None) <br>
+  这个方法，str参数是个以' . '分隔的字符串。path参数是个文件路径<br>
+  格式例子: 
+  'lightpyd.default.my_ip',意思分别是 lightpyd 不带 ' .ini ' 的文件名, default 第一个 section 的名称, my_ip 是 key名称 <br>
+  如果不输入 path 参数，会默认到 /opt/python-daemonize/LightPYD/config 目录去查找 lightpyd 文件<br>
+  如果输入 path 参数，会到path路径下去查找 lightpyd 文件
+  
+#### 特别注意: 配置文件必须全小写，大写的配置文件名称会在 Config 读取配置的时候转换成小写，最后导致读取配置失败
+  
 ```
 _file = 'config.ini'
 path1 = '/opt/python-daemonize/LightPYD/frame/'
