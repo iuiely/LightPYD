@@ -102,7 +102,7 @@ mysql_connection = mysql+pymysql://db_user:db_password@db_host:db_port/db_databa
   如果不输入 path 参数，会默认到 /opt/python-daemonize/LightPYD/config 目录去查找 lightpyd 文件<br>
   如果输入 path 参数，会到path路径下去查找 lightpyd 文件
   
-#### 特别注意: 配置文件必须全小写，大写的配置文件名称会在 Config 读取配置的时候转换成小写，最后导致读取配置失败
+#### 特别注意: 配置文件必须全小写，大写的配置文件名称会在 Config 读取配置的时候转换成小写，最后导致读取配置失败。get文法输入的配置文件名称，格式例子中的 lightpyd 可以随意输入大小写，如下:
   
 ```
 _file = 'config.ini'
@@ -112,6 +112,6 @@ res0 = Config.DictMake(_file,path1)
 print(res0)
 res1 = Config.get('LightPYD',path2)
 print(res1)
-res2 = Config.get('LightPYD.default')
+res2 = Config.get('lightPYD.default')
 print(res2)
 ```
