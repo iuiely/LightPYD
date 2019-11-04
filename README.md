@@ -82,3 +82,17 @@ my_ip = 192.168.1.102
 [mysql]
 mysql_connection = mysql+pymysql://db_user:db_password@db_host:db_port/db_database
 ```
+##### 读取配置文件的使用方法
+  在读取配置前需要把目录加入到sys.path中.(bin/LightPYD 启动脚本已加入) <br>
+  from frame.lib.Config import * <br>
+```
+_file = 'config.ini'
+path1 = '/opt/python-daemonize/LightPYD/frame/'
+path2 = '/opt/python-daemonize/LightPYD/config'    
+res0 = Config.DictMake(_file,path1)
+print(res0)
+res1 = Config.get('LightPYD',path2)
+print(res1)
+res2 = Config.get('LightPYD.default')
+print(res2)
+```
