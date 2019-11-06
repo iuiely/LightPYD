@@ -18,9 +18,3 @@ class ConsoleServer :
     @classmethod
     def status(cls,config):
         print(config)
-'''
-if __name__ == '__main__' :
-    consoleserver = ConsoleServer()
-    conf = {"start":"start"}
-    consoleserver.start(conf)
-'''
