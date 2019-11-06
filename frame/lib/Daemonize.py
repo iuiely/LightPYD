@@ -1,21 +1,15 @@
 # !/usr/bin/env python
 #coding:utf-8
-# python模拟linux的守护进程
 import os
 import sys
 import time
 import atexit
 import string 
-import ctypes
 import setproctitle
 from signal import SIGTERM
-from apps.console import *
-
-#libc=ctypes.CDLL('libc.so.6')
 
 class Daemonize() :
     def __init__(self, config):
-#        print(config)
         BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         if config['pid_file'] != '':
             self.pid_file = config['pid_file']
@@ -95,11 +89,11 @@ class Daemonize() :
         except OSError:
             sys.stderr.write('fork #2 failed: %d (%s)\n' % (e.errno, e.strerror))
             sys.exit(1)
+        #设置守护进程名称
         setproctitle.setproctitle(self.process_name)
         # 把之前的刷到硬盘上
         sys.stdout.flush()
         sys.stderr.flush()
-        #设置守护进程名称
         # 重定向标准文件描述符, 把stdout ,stderr 输出到默认或者指定的文件
         si = open(self.stdin, 'r')
         so = open(self.stdout, 'a+')
@@ -122,13 +116,6 @@ class Daemonize() :
         mtd = getattr(obj,method)
         mtd()
         # 工作内容
-        '''
-        while True:
-            # print '%s:hello world\n' % (time.ctime(),)
-            sys.stdout.write('%s:hello world\n' % (time.ctime(),))
-            sys.stdout.flush()
-            time.sleep(2)
-        '''
 
     # 获取PID
     def get_pid(self):
@@ -154,7 +141,6 @@ class Daemonize() :
             message = 'pid_file %s already exist. Process already running!\n'
             sys.stderr.write(message % self.pid_file)
             sys.exit(1)
- 
         # 启动守护进程
         self._daemonize()
         # 执行任务
@@ -203,25 +189,3 @@ class Daemonize() :
         else:
             message = "The process is running, PID is %s .\n"
             sys.stderr.write(message % str(pid))
-        
-'''            
-if __name__=="__main__":
-    config = {'pid_file': '', 'error_log': '', 'access_log': '', 'service': 'vnet-agent', 'class': 'console', 'method': 'execute', 'app_path': '', 'command': ['start']}
-    daemon = Daemon(config)
-    if len(sys.argv) == 2:
-        if 'start' == sys.argv[1]:
-            daemon.start()
-        elif 'stop' == sys.argv[1]:
-            daemon.stop()
-        elif 'restart' == sys.argv[1]:
-            daemon.restart()
-        elif 'status' == sys.argv[1]:
-            daemon.status()
-        else:
-            print 'unknown command'
-            sys.exit(2)
-        sys.exit(0)
-    else:
-        print 'usage: %s start|stop|restart|status' % sys.argv[0]
-        sys.exit(2)
-'''
